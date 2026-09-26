@@ -59,10 +59,13 @@ Powered by an in-app **Manager-Worker Agent Framework** (`src/lib/manager-agent.
 
 ### 🔄 6. Frictionless Student UX
 - **No Login Required**: Students enter credentials directly without creating accounts.
+- **Dark Mode Support 🌙**: Toggleable dark mode theme that inverts the UI perfectly for late-night merit checking.
+- **Smart Alternative Suggestions 💡**: If a selected university is out of reach ("Unlikely"), the engine automatically scans all 80+ universities and suggests alternatives where the student has a Safe or Likely chance!
 - **Reset Form**: One-click **🔄 Reset Form** button clears all previous marks and resets state instantly.
 
-### 🔐 7. Security & Resilience
-- **Rate Limiting**: In-memory sliding window rate limiters protect all API endpoints (`/api/calculate`, `/api/agent`, `/api/advisor`).
+### 🔐 7. Security, Feedback & Resilience
+- **Interactive User Feedback**: Built-in review system allowing users to rate the platform out of 10 and leave text reviews, visible on a "Recent Reviews" board.
+- **Rate Limiting**: In-memory sliding window rate limiters protect all API endpoints (`/api/calculate`, `/api/agent`, `/api/feedback`, `/api/advisor`).
 - **HTTP Security Headers**: Strict CSP, X-Frame-Options, and X-Content-Type-Options configured.
 - **100% Zero-Downtime Fallback**: Automatic fallback to static seed data if PostgreSQL is offline, ensuring zero runtime crashes.
 
