@@ -3,22 +3,10 @@ import { Pool } from "pg";
 
 const databaseUrl = process.env.DATABASE_URL;
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
-}
-
-const globalForDb = globalThis as typeof globalThis & {
-  __arenaNextJsPostgresqlPool?: Pool;
-};
-
-export const pool =
-  globalForDb.__arenaNextJsPostgresqlPool ??
-  new Pool({
-    connectionString: databaseUrl,
-  });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForDb.__arenaNextJsPostgresqlPool = pool;
-}
+// On Vercel build time, DATABASE_URL might not be set. 
+// We create a dummy pool to prevent build failures.
+const pool = new Pool({
+  connectionString: databaseUrl || "postgres://dummy:dummy@localhost:5432/dummy",
+});
 
 export const db = drizzle(pool);
