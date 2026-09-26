@@ -194,19 +194,17 @@ export default function CalculatorApp() {
   const [showChat, setShowChat] = useState(false);
 
   // Form state
-  const [matricObtained, setMatricObtained] = useState(920);
-  const [matricTotal, setMatricTotal] = useState(1100);
-  const [interObtained, setInterObtained] = useState(965);
-  const [interTotal, setInterTotal] = useState(1100);
+  const [matricObtained, setMatricObtained] = useState<number | "">("");
+  const [matricTotal, setMatricTotal] = useState<number | "">(1100);
+  const [interObtained, setInterObtained] = useState<number | "">("");
+  const [interTotal, setInterTotal] = useState<number | "">(1100);
   const [isHafiz, setIsHafiz] = useState(false);
   const [stream, setStream] = useState("Pre-Engineering");
   const [studentProvince, setStudentProvince] = useState("Punjab");
   const [studentCity, setStudentCity] = useState("Lahore");
-  const [selectedPrograms, setSelectedPrograms] = useState<string[]>([
-    "BS Computer Science",
-  ]);
+  const [selectedPrograms, setSelectedPrograms] = useState<string[]>([]);
   const [selectedUnis, setSelectedUnis] = useState<string[]>([]);
-  const [testScores, setTestScores] = useState<Record<string, number>>({});
+  const [testScores, setTestScores] = useState<Record<string, number | "">>({});
 
   // Filter state
   const [cityFilter, setCityFilter] = useState("All");
@@ -260,6 +258,15 @@ export default function CalculatorApp() {
     loadData();
   }, []);
 
+  // Scroll to calculator when changing steps
+  useEffect(() => {
+    const el = document.getElementById("calculator");
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [step]);
+
   const safeUnis = Array.isArray(universities) ? universities : [];
 
   const allProgramNames = Array.from(
@@ -294,13 +301,13 @@ export default function CalculatorApp() {
   };
 
   const handleResetAll = useCallback(() => {
-    setMatricObtained(0);
+    setMatricObtained("");
     setMatricTotal(1100);
-    setInterObtained(0);
+    setInterObtained("");
     setInterTotal(1100);
     setIsHafiz(false);
     setStream("Pre-Engineering");
-    setSelectedPrograms(["BS Computer Science"]);
+    setSelectedPrograms([]);
     if (universities.length > 0) {
       const top6 = universities.slice(0, 6).map((u) => u.id);
       setSelectedUnis(top6);
@@ -320,17 +327,25 @@ export default function CalculatorApp() {
   const handleCalculate = useCallback(async () => {
     setCalculating(true);
     try {
+      // Ensure all selected unis have at least a default score of 70 if untouched
+      const finalTestScores = { ...testScores };
+      selectedUnis.forEach(id => {
+        if (finalTestScores[id] === undefined || finalTestScores[id] === "") {
+          finalTestScores[id] = 70;
+        }
+      });
+
       const res = await fetch("/api/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          matricObtained,
-          matricTotal,
-          interObtained,
-          interTotal,
+          matricObtained: Number(matricObtained) || 0,
+          matricTotal: Number(matricTotal) || 1,
+          interObtained: Number(interObtained) || 0,
+          interTotal: Number(interTotal) || 1,
           isHafiz,
           stream,
-          testScores,
+          testScores: finalTestScores,
           selectedPrograms,
           selectedUniversityIds: selectedUnis,
         }),
@@ -405,7 +420,7 @@ export default function CalculatorApp() {
                   <input
                     type="number"
                     value={matricObtained}
-                    onChange={(e) => setMatricObtained(Number(e.target.value))}
+                    onChange={(e) => setMatricObtained(e.target.value === "" ? "" : Number(e.target.value))}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-400 outline-none transition text-lg"
                     min={0}
                     max={matricTotal}
@@ -416,7 +431,7 @@ export default function CalculatorApp() {
                   <input
                     type="number"
                     value={matricTotal}
-                    onChange={(e) => setMatricTotal(Number(e.target.value))}
+                    onChange={(e) => setMatricTotal(e.target.value === "" ? "" : Number(e.target.value))}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-400 outline-none transition text-lg"
                     min={1}
                   />
@@ -438,7 +453,7 @@ export default function CalculatorApp() {
                   <input
                     type="number"
                     value={interObtained}
-                    onChange={(e) => setInterObtained(Number(e.target.value))}
+                    onChange={(e) => setInterObtained(e.target.value === "" ? "" : Number(e.target.value))}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition text-lg"
                     min={0}
                     max={interTotal}
@@ -449,7 +464,7 @@ export default function CalculatorApp() {
                   <input
                     type="number"
                     value={interTotal}
-                    onChange={(e) => setInterTotal(Number(e.target.value))}
+                    onChange={(e) => setInterTotal(e.target.value === "" ? "" : Number(e.target.value))}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition text-lg"
                     min={1}
                   />

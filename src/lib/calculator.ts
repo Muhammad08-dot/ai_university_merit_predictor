@@ -56,6 +56,7 @@ export interface MeritResult {
   interContribution: number;
   testContribution: number;
   hafizBonus: number;
+  isAlternative?: boolean;
 }
 
 export function calculateAggregate(
@@ -120,9 +121,9 @@ export function calculateResults(
   const results: MeritResult[] = [];
 
   for (const uni of universities) {
-    if (!input.selectedUniversityIds.includes(uni.id)) continue;
+    const isSelected = input.selectedUniversityIds.length === 0 || input.selectedUniversityIds.includes(uni.id);
 
-    const testPct = input.testScores[uni.id] ?? 50;
+    const testPct = input.testScores[uni.id] ?? 70;
 
     const matchingPrograms = uni.programs.filter(
       (p) =>
@@ -142,6 +143,13 @@ export function calculateResults(
         input.isHafiz
       );
       const likelihood = getLikelihood(aggregate, cutoff);
+
+      if (!isSelected && likelihood === "Unlikely") {
+        continue; // Only suggest alternatives that are within reach
+      }
+      if (!isSelected && likelihood === "Reach") {
+        continue;
+      }
       const testScoreNeeded = getTestScoreNeeded(
         matricPct,
         interPct,
@@ -182,6 +190,7 @@ export function calculateResults(
           (testPct * (uni.testWeight / totalWeightRaw)).toFixed(2)
         ),
         hafizBonus,
+        isAlternative: !isSelected,
       });
     }
   }

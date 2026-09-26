@@ -65,6 +65,18 @@ export default function Footer() {
           </p>
         </div>
 
+        {/* Open Source Notice */}
+        <div className="bg-emerald-950/50 rounded-xl p-5 mb-8 border border-emerald-800/50 text-center flex flex-col items-center justify-center">
+          <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+            <span>💖</span> Open Source Project
+          </h4>
+          <p className="text-green-200/80 text-sm max-w-2xl mx-auto">
+            This is a 100% open-source project created to help Pakistani students. 
+            Anyone is free to use, copy, modify, and improve this calculator. 
+            Let's build a better future together!
+          </p>
+        </div>
+
         <div className="border-t border-green-800/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-green-300/50">
             © 2026 UniMatch Pakistan. Built with 💚 for Pakistani students. Data: 2025-2026 admissions.

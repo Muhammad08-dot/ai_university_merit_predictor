@@ -26,6 +26,16 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
+  /* Simple Dark Mode via Invert + Hue Rotate (Light Green becomes Dark Green) */
+  html.dark {
+    filter: invert(1) hue-rotate(180deg);
+    background-color: #ffffff;
+  }
+  
+  html.dark img, html.dark video {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
   ::selection {
     background: #bbf7d0;
     color: #14532d;

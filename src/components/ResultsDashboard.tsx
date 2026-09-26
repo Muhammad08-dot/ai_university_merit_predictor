@@ -197,7 +197,12 @@ export default function ResultsDashboard({
                 <div className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h4 className="font-extrabold text-slate-900 text-lg">{r.universityShortName}</h4>
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-extrabold text-slate-900 text-lg">{r.universityShortName}</h4>
+                        {(r as any).isAlternative && (
+                          <span className="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200 font-bold tracking-tight">💡 SUGGESTION</span>
+                        )}
+                      </div>
                       <p className="text-xs text-slate-500 font-medium">{r.programName}</p>
                     </div>
                     <span className={`text-xs font-black px-2.5 py-1 rounded-full ${config.bg} ${config.color} border ${config.border}`}>

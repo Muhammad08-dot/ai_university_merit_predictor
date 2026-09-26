@@ -69,3 +69,11 @@ export interface CalculationResult {
   likelihood: "Safe" | "Likely" | "Borderline" | "Reach" | "Unlikely";
   testScoreNeeded: number;
 }
+
+// User Feedback
+export const feedbacks = pgTable("feedbacks", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  rating: integer("rating").notNull(),
+  feedbackText: text("feedback_text"),
+  createdAt: timestamp("created_at").defaultNow(),
+});

@@ -16,9 +16,15 @@ export interface UniversitySeed {
   programs: ProgramSeed[];
 }
 
+export interface CutoffHistory {
+  year: number;
+  cutoff: number;
+}
+
 export interface ProgramSeed {
   name: string;
-  cutoffTypical: number;
+  cutoffTypical: number | null; // Fallback for MVP
+  cutoffHistory?: CutoffHistory[]; // Year-wise data for scalability
   eligibility: string;
   seats: number | null;
 }
@@ -34,8 +40,8 @@ export const UNIVERSITY_SEED_DATA: UniversitySeed[] = [
     nationalRank: 1,
     globalRank: 650,
     matricWeight: 10,
-    interWeight: 40,
-    testWeight: 50,
+    interWeight: 15,
+    testWeight: 75,
     testName: "NET",
     testMaxScore: 200,
     website: "https://nust.edu.pk",
@@ -237,8 +243,8 @@ export const UNIVERSITY_SEED_DATA: UniversitySeed[] = [
     nationalRank: 7,
     globalRank: null,
     matricWeight: 0,
-    interWeight: 50,
-    testWeight: 50,
+    interWeight: 40,
+    testWeight: 60,
     testName: "NED Entry Test",
     testMaxScore: 100,
     website: "https://neduet.edu.pk",
@@ -466,4 +472,1205 @@ export const UNIVERSITY_SEED_DATA: UniversitySeed[] = [
       { name: "BS Earth Sciences", cutoffTypical: 58, eligibility: "45% FSc Science", seats: 60 },
     ],
   },
+  
+  // --- NEW MAJOR MAIN CAMPUSES ADDED ---
+  {
+    name: "Quaid-e-Azam University",
+    shortName: "QAU",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 1, // General
+    globalRank: 400,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "USAT (Pass/Fail)",
+    testMaxScore: 100,
+    website: "https://qau.edu.pk",
+    feesRange: "PKR 50,000 - 90,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 88, eligibility: "50% FSc", seats: 100 },
+      { name: "BS Physics", cutoffTypical: 85, eligibility: "50% FSc", seats: 60 },
+    ],
+  },
+  {
+    name: "King Edward Medical University",
+    shortName: "KEMU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 1, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT",
+    testMaxScore: 200,
+    website: "https://kemu.edu.pk",
+    feesRange: "PKR 30,000 - 60,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 93, eligibility: "65% FSc Pre-Medical", seats: 300 },
+      { name: "BDS", cutoffTypical: 91, eligibility: "65% FSc Pre-Medical", seats: 100 },
+    ],
+  },
+  {
+    name: "Dow University of Health Sciences",
+    shortName: "DUHS",
+    city: "Karachi",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 2, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT",
+    testMaxScore: 200,
+    website: "https://duhs.edu.pk",
+    feesRange: "PKR 50,000 - 150,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 89, eligibility: "65% FSc Pre-Medical", seats: 350 },
+      { name: "BDS", cutoffTypical: 87, eligibility: "65% FSc Pre-Medical", seats: 150 },
+    ],
+  },
+  {
+    name: "University of Agriculture Faisalabad",
+    shortName: "UAF",
+    city: "Faisalabad",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 4,
+    globalRank: 800,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "UAF Entry Test",
+    testMaxScore: 100,
+    website: "https://uaf.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "BS Agriculture", cutoffTypical: 75, eligibility: "50% FSc", seats: 400 },
+      { name: "BS Computer Science", cutoffTypical: 80, eligibility: "50% FSc", seats: 100 },
+    ],
+  },
+  {
+    name: "University of Karachi",
+    shortName: "UoK",
+    city: "Karachi",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 10,
+    globalRank: 1000,
+    matricWeight: 0,
+    interWeight: 100,
+    testWeight: 0,
+    testName: "KU Entry Test (Pass/Fail for some)",
+    testMaxScore: 100,
+    website: "https://uok.edu.pk",
+    feesRange: "PKR 30,000 - 70,000/year",
+    programs: [
+      { name: "BS Software Engineering", cutoffTypical: 82, eligibility: "50% FSc", seats: 120 },
+      { name: "Pharm-D", cutoffTypical: 85, eligibility: "60% FSc", seats: 200 },
+    ],
+  },
+  {
+    name: "National University of Modern Languages",
+    shortName: "NUML",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 15,
+    globalRank: null,
+    matricWeight: 5,
+    interWeight: 10,
+    testWeight: 85, // 75% Entry Test + 10% Interview combined
+    testName: "NUML Entry Test",
+    testMaxScore: 100,
+    website: "https://numl.edu.pk",
+    feesRange: "PKR 60,000 - 100,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 72, eligibility: "50% FSc", seats: 150 },
+      { name: "BS Software Engineering", cutoffTypical: 70, eligibility: "50% FSc", seats: 120 },
+      { name: "BS English", cutoffTypical: 65, eligibility: "45% FA/FSc", seats: 200 },
+    ],
+  },
+  
+  // --- BATCH 2: NEXT 10 MAJOR UNIVERSITIES ---
+  {
+    name: "Bahauddin Zakariya University",
+    shortName: "BZU",
+    city: "Multan",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 12,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "BZU Entry Test (Pass/Fail)",
+    testMaxScore: 100,
+    website: "https://bzu.edu.pk",
+    feesRange: "PKR 40,000 - 70,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 78, eligibility: "50% FSc", seats: 120 },
+      { name: "BS Information Technology", cutoffTypical: 75, eligibility: "50% FSc", seats: 100 },
+    ],
+  },
+  {
+    name: "Government College University",
+    shortName: "GCU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 14,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "GCU Test",
+    testMaxScore: 100,
+    website: "https://gcu.edu.pk",
+    feesRange: "PKR 50,000 - 80,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 84, eligibility: "50% FSc", seats: 80 },
+      { name: "BS Psychology", cutoffTypical: 80, eligibility: "50% FSc/FA", seats: 60 },
+    ],
+  },
+  {
+    name: "Shaheed Zulfikar Ali Bhutto Institute of Science and Technology",
+    shortName: "SZABIST",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 20,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "SZABIST Entry Test",
+    testMaxScore: 100,
+    website: "https://szabist.edu.pk",
+    feesRange: "PKR 250,000 - 350,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "50% FSc", seats: 150 },
+      { name: "BBA", cutoffTypical: 68, eligibility: "50% FA/FSc", seats: 200 },
+    ],
+  },
+  {
+    name: "National Defence University",
+    shortName: "NDU",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 25,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "NDU Entry Test",
+    testMaxScore: 100,
+    website: "https://ndu.edu.pk",
+    feesRange: "PKR 80,000 - 120,000/year",
+    programs: [
+      { name: "BS International Relations", cutoffTypical: 70, eligibility: "50% FA/FSc", seats: 100 },
+      { name: "BS Strategic Studies", cutoffTypical: 68, eligibility: "50% FA/FSc", seats: 80 },
+    ],
+  },
+  {
+    name: "Institute of Space Technology",
+    shortName: "IST",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 30,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "IST Entry Test",
+    testMaxScore: 100,
+    website: "https://ist.edu.pk",
+    feesRange: "PKR 120,000 - 180,000/year",
+    programs: [
+      { name: "BS Aerospace Engineering", cutoffTypical: 78, eligibility: "60% FSc Pre-Eng", seats: 80 },
+      { name: "BS Computer Science", cutoffTypical: 75, eligibility: "60% FSc Pre-Eng", seats: 100 },
+    ],
+  },
+  {
+    name: "University of Central Punjab",
+    shortName: "UCP",
+    city: "Lahore",
+    province: "Punjab",
+    type: "private",
+    nationalRank: 35,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "UCP Admission Test (Pass/Fail)",
+    testMaxScore: 100,
+    website: "https://ucp.edu.pk",
+    feesRange: "PKR 250,000 - 350,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "50% FSc", seats: 300 },
+      { name: "BBA", cutoffTypical: 60, eligibility: "45% FA/FSc", seats: 400 },
+    ],
+  },
+  {
+    name: "University of Management and Technology",
+    shortName: "UMT",
+    city: "Lahore",
+    province: "Punjab",
+    type: "private",
+    nationalRank: 36,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "UMT Admission Test",
+    testMaxScore: 100,
+    website: "https://umt.edu.pk",
+    feesRange: "PKR 250,000 - 380,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 62, eligibility: "50% FSc", seats: 350 },
+      { name: "BS Software Engineering", cutoffTypical: 60, eligibility: "50% FSc", seats: 250 },
+    ],
+  },
+  {
+    name: "Riphah International University",
+    shortName: "Riphah",
+    city: "Islamabad",
+    province: "Federal",
+    type: "private",
+    nationalRank: 40,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "Riphah Entry Test",
+    testMaxScore: 100,
+    website: "https://riphah.edu.pk",
+    feesRange: "PKR 200,000 - 450,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 68, eligibility: "50% FSc", seats: 200 },
+      { name: "DPT (Physical Therapy)", cutoffTypical: 72, eligibility: "60% FSc Pre-Medical", seats: 100 },
+    ],
+  },
+  {
+    name: "Iqra University",
+    shortName: "Iqra",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 42,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "Iqra Admission Test",
+    testMaxScore: 100,
+    website: "https://iqra.edu.pk",
+    feesRange: "PKR 200,000 - 300,000/year",
+    programs: [
+      { name: "BBA", cutoffTypical: 55, eligibility: "45% FA/FSc", seats: 300 },
+      { name: "BS Computer Science", cutoffTypical: 60, eligibility: "50% FSc", seats: 250 },
+    ],
+  },
+  {
+    name: "Capital University of Science & Technology",
+    shortName: "CUST",
+    city: "Islamabad",
+    province: "Federal",
+    type: "private",
+    nationalRank: 45,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "CUST Entry Test",
+    testMaxScore: 100,
+    website: "https://cust.edu.pk",
+    feesRange: "PKR 220,000 - 320,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "50% FSc", seats: 200 },
+      { name: "BS Software Engineering", cutoffTypical: 63, eligibility: "50% FSc", seats: 150 },
+    ],
+  },
+  
+  // --- BATCH 3 & 4: NEXT 20 UNIVERSITIES (SINDH, PUNJAB, KPK, BALOCHISTAN) ---
+  {
+    name: "University of Sindh",
+    shortName: "UoS Jamshoro",
+    city: "Jamshoro",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 15,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 30,
+    testWeight: 60,
+    testName: "UoS Entry Test",
+    testMaxScore: 100,
+    website: "https://usindh.edu.pk",
+    feesRange: "PKR 30,000 - 60,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "50% FSc", seats: 150 },
+      { name: "BBA", cutoffTypical: 60, eligibility: "45% FA/FSc", seats: 200 }
+    ]
+  },
+  {
+    name: "Sukkur IBA University",
+    shortName: "Sukkur IBA",
+    city: "Sukkur",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 18,
+    globalRank: null,
+    matricWeight: 0,
+    interWeight: 40,
+    testWeight: 60,
+    testName: "STS Entry Test",
+    testMaxScore: 100,
+    website: "https://iba-suk.edu.pk",
+    feesRange: "PKR 80,000 - 150,000/year",
+    programs: [
+      { name: "BBA", cutoffTypical: 65, eligibility: "50% FSc", seats: 120 },
+      { name: "BS Computer Science", cutoffTypical: 68, eligibility: "50% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Quaid-e-Awam University of Engineering, Science and Technology",
+    shortName: "QUEST",
+    city: "Nawabshah",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 35,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "QUEST Entry Test",
+    testMaxScore: 100,
+    website: "https://quest.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "BS Civil Engineering", cutoffTypical: 68, eligibility: "60% FSc Pre-Eng", seats: 150 },
+      { name: "BS Software Engineering", cutoffTypical: 70, eligibility: "60% FSc Pre-Eng/ICS", seats: 100 }
+    ]
+  },
+  {
+    name: "Shah Abdul Latif University",
+    shortName: "SALU",
+    city: "Khairpur",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 40,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "No Entry Test (Mostly)",
+    testMaxScore: 100,
+    website: "https://salu.edu.pk",
+    feesRange: "PKR 30,000 - 60,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 60, eligibility: "45% FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "University of Sargodha",
+    shortName: "UOS",
+    city: "Sargodha",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 22,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "Merit Based (No Test)",
+    testMaxScore: 100,
+    website: "https://su.edu.pk",
+    feesRange: "PKR 40,000 - 70,000/year",
+    programs: [
+      { name: "BS Information Technology", cutoffTypical: 75, eligibility: "50% FSc", seats: 120 },
+      { name: "BS English", cutoffTypical: 70, eligibility: "50% FA/FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Islamia University of Bahawalpur",
+    shortName: "IUB",
+    city: "Bahawalpur",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 20,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "IUB Admission Test (Pass/Fail)",
+    testMaxScore: 100,
+    website: "https://iub.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 72, eligibility: "50% FSc", seats: 200 },
+      { name: "Pharm-D", cutoffTypical: 80, eligibility: "60% FSc Pre-Medical", seats: 150 }
+    ]
+  },
+  {
+    name: "University of Gujrat",
+    shortName: "UOG",
+    city: "Gujrat",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 30,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://uog.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "BS Software Engineering", cutoffTypical: 78, eligibility: "50% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Fatima Jinnah Women University",
+    shortName: "FJWU",
+    city: "Rawalpindi",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 32,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "NTS NAT (for some)",
+    testMaxScore: 100,
+    website: "https://fjwu.edu.pk",
+    feesRange: "PKR 45,000 - 85,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 70, eligibility: "50% FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "International Islamic University Islamabad",
+    shortName: "IIUI",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 16,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 40,
+    testWeight: 40,
+    testName: "IIUI Entry Test",
+    testMaxScore: 100,
+    website: "https://iiu.edu.pk",
+    feesRange: "PKR 50,000 - 100,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 74, eligibility: "50% FSc", seats: 150 },
+      { name: "BS Software Engineering", cutoffTypical: 72, eligibility: "50% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Foundation University",
+    shortName: "FUI",
+    city: "Islamabad",
+    province: "Federal",
+    type: "private",
+    nationalRank: 40,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "FUI Entry Test",
+    testMaxScore: 100,
+    website: "https://fui.edu.pk",
+    feesRange: "PKR 150,000 - 250,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "50% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "Shifa Tameer-e-Millat University",
+    shortName: "STMU",
+    city: "Islamabad",
+    province: "Federal",
+    type: "private",
+    nationalRank: 42,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT / STMU Test",
+    testMaxScore: 100,
+    website: "https://stmu.edu.pk",
+    feesRange: "PKR 300,000 - 600,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 62, eligibility: "50% FSc", seats: 80 },
+      { name: "MBBS", cutoffTypical: 85, eligibility: "65% FSc Pre-Medical", seats: 100 }
+    ]
+  },
+  {
+    name: "Gomal University",
+    shortName: "GU",
+    city: "D.I. Khan",
+    province: "KPK",
+    type: "public",
+    nationalRank: 38,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://gu.edu.pk",
+    feesRange: "PKR 30,000 - 60,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 60, eligibility: "45% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Abdul Wali Khan University",
+    shortName: "AWKUM",
+    city: "Mardan",
+    province: "KPK",
+    type: "public",
+    nationalRank: 25,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://awkum.edu.pk",
+    feesRange: "PKR 35,000 - 65,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 65, eligibility: "45% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "Kohat University of Science and Technology",
+    shortName: "KUST",
+    city: "Kohat",
+    province: "KPK",
+    type: "public",
+    nationalRank: 45,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://kust.edu.pk",
+    feesRange: "PKR 30,000 - 60,000/year",
+    programs: [
+      { name: "BS Software Engineering", cutoffTypical: 64, eligibility: "45% FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "University of Malakand",
+    shortName: "UoM",
+    city: "Chakdara",
+    province: "KPK",
+    type: "public",
+    nationalRank: 48,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://uom.edu.pk",
+    feesRange: "PKR 35,000 - 65,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 62, eligibility: "45% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Hazara University",
+    shortName: "HU",
+    city: "Mansehra",
+    province: "KPK",
+    type: "public",
+    nationalRank: 50,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://hu.edu.pk",
+    feesRange: "PKR 35,000 - 60,000/year",
+    programs: [
+      { name: "BS Information Technology", cutoffTypical: 60, eligibility: "45% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Lasbela University of Agriculture, Water and Marine Sciences",
+    shortName: "LUAWMS",
+    city: "Uthal",
+    province: "Balochistan",
+    type: "public",
+    nationalRank: 55,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://luawms.edu.pk",
+    feesRange: "PKR 25,000 - 50,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 55, eligibility: "45% FSc", seats: 60 }
+    ]
+  },
+  {
+    name: "Iqra National University",
+    shortName: "INU",
+    city: "Peshawar",
+    province: "KPK",
+    type: "private",
+    nationalRank: 58,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "INU Test",
+    testMaxScore: 100,
+    website: "https://inu.edu.pk",
+    feesRange: "PKR 150,000 - 200,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 58, eligibility: "45% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "CECOS University of IT and Emerging Sciences",
+    shortName: "CECOS",
+    city: "Peshawar",
+    province: "KPK",
+    type: "private",
+    nationalRank: 60,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "CECOS Entry Test",
+    testMaxScore: 100,
+    website: "https://cecos.edu.pk",
+    feesRange: "PKR 160,000 - 220,000/year",
+    programs: [
+      { name: "BS Civil Engineering", cutoffTypical: 60, eligibility: "60% FSc Pre-Eng", seats: 80 },
+      { name: "BS Computer Science", cutoffTypical: 55, eligibility: "50% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "National Textile University",
+    shortName: "NTU",
+    city: "Faisalabad",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 33,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "NTS NAT",
+    testMaxScore: 100,
+    website: "https://ntu.edu.pk",
+    feesRange: "PKR 50,000 - 90,000/year",
+    programs: [
+      { name: "BS Textile Engineering", cutoffTypical: 65, eligibility: "60% FSc Pre-Eng", seats: 100 },
+      { name: "BS Computer Science", cutoffTypical: 72, eligibility: "50% FSc", seats: 80 }
+    ],
+  },
+  
+  // --- BATCH 5: FINAL 14 UNIVERSITIES (REACHING 70 TARGET) ---
+  {
+    name: "University of Engineering and Technology Taxila",
+    shortName: "UET Taxila",
+    city: "Taxila",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 17,
+    globalRank: null,
+    matricWeight: 17,
+    interWeight: 50,
+    testWeight: 33,
+    testName: "ECAT",
+    testMaxScore: 400,
+    website: "https://uettaxila.edu.pk",
+    feesRange: "PKR 60,000 - 120,000/year",
+    programs: [
+      { name: "BS Civil Engineering", cutoffTypical: 76, eligibility: "60% FSc Pre-Eng", seats: 120 },
+      { name: "BS Software Engineering", cutoffTypical: 80, eligibility: "60% FSc Pre-Eng/ICS", seats: 100 }
+    ]
+  },
+  {
+    name: "Muhammad Nawaz Sharif UET",
+    shortName: "MNS UET",
+    city: "Multan",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 42,
+    globalRank: null,
+    matricWeight: 17,
+    interWeight: 50,
+    testWeight: 33,
+    testName: "ECAT",
+    testMaxScore: 400,
+    website: "https://mnsuet.edu.pk",
+    feesRange: "PKR 50,000 - 90,000/year",
+    programs: [
+      { name: "BS Chemical Engineering", cutoffTypical: 68, eligibility: "60% FSc Pre-Eng", seats: 80 }
+    ]
+  },
+  {
+    name: "NFC Institute of Engineering and Fertilizer Research",
+    shortName: "NFC IEFR",
+    city: "Faisalabad",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 48,
+    globalRank: null,
+    matricWeight: 17,
+    interWeight: 50,
+    testWeight: 33,
+    testName: "ECAT",
+    testMaxScore: 400,
+    website: "https://iefr.edu.pk",
+    feesRange: "PKR 60,000 - 100,000/year",
+    programs: [
+      { name: "BS Electrical Engineering", cutoffTypical: 65, eligibility: "60% FSc Pre-Eng", seats: 100 }
+    ]
+  },
+  {
+    name: "Khawaja Fareed University of Engineering and Information Technology",
+    shortName: "KFUEIT",
+    city: "Rahim Yar Khan",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 34,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://kfueit.edu.pk",
+    feesRange: "PKR 45,000 - 85,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 70, eligibility: "50% FSc", seats: 150 }
+    ]
+  },
+  {
+    name: "Information Technology University",
+    shortName: "ITU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 24,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "ITU Admission Test",
+    testMaxScore: 100,
+    website: "https://itu.edu.pk",
+    feesRange: "PKR 80,000 - 150,000/year",
+    programs: [
+      { name: "BS Artificial Intelligence", cutoffTypical: 82, eligibility: "60% FSc", seats: 80 },
+      { name: "BS Computer Science", cutoffTypical: 84, eligibility: "60% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "Kinnaird College for Women",
+    shortName: "Kinnaird",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 26,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based (Aptitude for some)",
+    testMaxScore: 100,
+    website: "https://kinnaird.edu.pk",
+    feesRange: "PKR 70,000 - 130,000/year",
+    programs: [
+      { name: "BS Psychology", cutoffTypical: 82, eligibility: "60% FA/FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "Lahore College for Women University",
+    shortName: "LCWU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 28,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://lcwu.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "BS English", cutoffTypical: 75, eligibility: "60% FA/FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "National College of Arts",
+    shortName: "NCA",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 31,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 20,
+    testWeight: 70,
+    testName: "NCA Aptitude Test",
+    testMaxScore: 100,
+    website: "https://nca.edu.pk",
+    feesRange: "PKR 100,000 - 180,000/year",
+    programs: [
+      { name: "B.Arch (Architecture)", cutoffTypical: 70, eligibility: "60% FA/FSc", seats: 50 },
+      { name: "Fine Arts", cutoffTypical: 65, eligibility: "60% FA/FSc", seats: 60 }
+    ]
+  },
+  {
+    name: "University of Education",
+    shortName: "UE",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 38,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://ue.edu.pk",
+    feesRange: "PKR 35,000 - 65,000/year",
+    programs: [
+      { name: "BS Information Technology", cutoffTypical: 70, eligibility: "50% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "University of Sahiwal",
+    shortName: "UoSahiwal",
+    city: "Sahiwal",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 65,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://uosahiwal.edu.pk",
+    feesRange: "PKR 30,000 - 55,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 68, eligibility: "50% FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "Jinnah Sindh Medical University",
+    shortName: "JSMU",
+    city: "Karachi",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 12, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT",
+    testMaxScore: 200,
+    website: "https://jsmu.edu.pk",
+    feesRange: "PKR 40,000 - 80,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 88, eligibility: "65% FSc Pre-Med", seats: 200 }
+    ]
+  },
+  {
+    name: "Liaquat University of Medical & Health Sciences",
+    shortName: "LUMHS",
+    city: "Jamshoro",
+    province: "Sindh",
+    type: "public",
+    nationalRank: 14, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT",
+    testMaxScore: 200,
+    website: "https://lumhs.edu.pk",
+    feesRange: "PKR 45,000 - 85,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 86, eligibility: "65% FSc Pre-Med", seats: 250 }
+    ]
+  },
+  {
+    name: "Khyber Medical University",
+    shortName: "KMU",
+    city: "Peshawar",
+    province: "KPK",
+    type: "public",
+    nationalRank: 16, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT / ETEA",
+    testMaxScore: 200,
+    website: "https://kmu.edu.pk",
+    feesRange: "PKR 50,000 - 100,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 87, eligibility: "65% FSc Pre-Med", seats: 200 }
+    ]
+  },
+  {
+    name: "Bolan University of Medical and Health Sciences",
+    shortName: "BUMHS",
+    city: "Quetta",
+    province: "Balochistan",
+    type: "public",
+    nationalRank: 25, // Medical
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "MDCAT",
+    testMaxScore: 200,
+    website: "https://bumhs.edu.pk",
+    feesRange: "PKR 35,000 - 65,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 80, eligibility: "65% FSc Pre-Med", seats: 150 }
+    ]
+  },
+  {
+    name: "National University of Modern Languages",
+    shortName: "NUML",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 15,
+    globalRank: null,
+    matricWeight: 5,
+    interWeight: 10,
+    testWeight: 85,
+    testName: "NUML Entry Test",
+    testMaxScore: 100,
+    website: "https://numl.edu.pk",
+    feesRange: "PKR 60,000 - 100,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 72, eligibility: "50% FSc", seats: 150 },
+      { name: "BS Software Engineering", cutoffTypical: 70, eligibility: "50% FSc", seats: 120 },
+      { name: "BS English", cutoffTypical: 65, eligibility: "45% FA/FSc", seats: 200 }
+    ]
+  },
+  
+  // --- BATCH 6: HEC CAMPUS LIST REMAINING UNIVERSITIES ---
+  {
+    name: "Federal Urdu University of Arts, Sciences & Technology",
+    shortName: "FUUAST",
+    city: "Islamabad",
+    province: "Federal",
+    type: "public",
+    nationalRank: 35,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://fuuast.edu.pk",
+    feesRange: "PKR 40,000 - 70,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 68, eligibility: "50% FSc", seats: 150 }
+    ]
+  },
+  {
+    name: "Virtual University of Pakistan",
+    shortName: "VU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 40,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based (Open)",
+    testMaxScore: 100,
+    website: "https://vu.edu.pk",
+    feesRange: "PKR 25,000 - 45,000/year",
+    programs: [
+      { name: "BS Computer Science", cutoffTypical: 50, eligibility: "45% FSc", seats: 1000 }
+    ]
+  },
+  {
+    name: "University of Veterinary & Animal Sciences",
+    shortName: "UVAS",
+    city: "Lahore",
+    province: "Punjab",
+    type: "public",
+    nationalRank: 18,
+    globalRank: null,
+    matricWeight: 30,
+    interWeight: 70,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://uvas.edu.pk",
+    feesRange: "PKR 50,000 - 90,000/year",
+    programs: [
+      { name: "DVM", cutoffTypical: 85, eligibility: "60% FSc Pre-Med", seats: 120 }
+    ]
+  },
+  {
+    name: "Hamdard University",
+    shortName: "Hamdard",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 42,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "Hamdard Entry Test",
+    testMaxScore: 100,
+    website: "https://hamdard.edu.pk",
+    feesRange: "PKR 200,000 - 400,000/year",
+    programs: [
+      { name: "Pharm-D", cutoffTypical: 65, eligibility: "60% FSc Pre-Med", seats: 150 },
+      { name: "BS Computer Science", cutoffTypical: 60, eligibility: "50% FSc", seats: 100 }
+    ]
+  },
+  {
+    name: "Preston University",
+    shortName: "Preston",
+    city: "Kohat",
+    province: "KPK",
+    type: "private",
+    nationalRank: 55,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://preston.edu.pk",
+    feesRange: "PKR 100,000 - 150,000/year",
+    programs: [
+      { name: "BBA", cutoffTypical: 50, eligibility: "45% FA/FSc", seats: 150 }
+    ]
+  },
+  {
+    name: "Sarhad University of Science & Information Technology",
+    shortName: "SUIT",
+    city: "Peshawar",
+    province: "KPK",
+    type: "private",
+    nationalRank: 48,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "SUIT Test",
+    testMaxScore: 100,
+    website: "https://suit.edu.pk",
+    feesRange: "PKR 120,000 - 180,000/year",
+    programs: [
+      { name: "BS Software Engineering", cutoffTypical: 58, eligibility: "50% FSc", seats: 120 }
+    ]
+  },
+  {
+    name: "Ziauddin University",
+    shortName: "Ziauddin",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 30, // Medical mostly
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "Ziauddin Entry Test",
+    testMaxScore: 100,
+    website: "https://zu.edu.pk",
+    feesRange: "PKR 350,000 - 600,000/year",
+    programs: [
+      { name: "MBBS", cutoffTypical: 78, eligibility: "65% FSc Pre-Med", seats: 100 }
+    ]
+  },
+  {
+    name: "Hajvery University",
+    shortName: "HU",
+    city: "Lahore",
+    province: "Punjab",
+    type: "private",
+    nationalRank: 50,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 80,
+    testWeight: 0,
+    testName: "Merit Based",
+    testMaxScore: 100,
+    website: "https://hup.edu.pk",
+    feesRange: "PKR 150,000 - 250,000/year",
+    programs: [
+      { name: "BBA", cutoffTypical: 55, eligibility: "45% FA/FSc", seats: 150 }
+    ]
+  },
+  {
+    name: "Greenwich University",
+    shortName: "Greenwich",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 60,
+    globalRank: null,
+    matricWeight: 10,
+    interWeight: 40,
+    testWeight: 50,
+    testName: "Aptitude Test",
+    testMaxScore: 100,
+    website: "https://greenwich.edu.pk",
+    feesRange: "PKR 250,000 - 400,000/year",
+    programs: [
+      { name: "BS Mass Communication", cutoffTypical: 60, eligibility: "45% FA/FSc", seats: 80 }
+    ]
+  },
+  {
+    name: "Ilma University",
+    shortName: "Ilma",
+    city: "Karachi",
+    province: "Sindh",
+    type: "private",
+    nationalRank: 65,
+    globalRank: null,
+    matricWeight: 20,
+    interWeight: 30,
+    testWeight: 50,
+    testName: "Ilma Admission Test",
+    testMaxScore: 100,
+    website: "https://ilmauniversity.edu.pk",
+    feesRange: "PKR 150,000 - 200,000/year",
+    programs: [
+      { name: "BBA", cutoffTypical: 50, eligibility: "45% FA/FSc", seats: 150 }
+    ]
+  }
 ];
