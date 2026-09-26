@@ -9,6 +9,7 @@ export default function Header() {
   useEffect(() => {
     // Check if dark mode is preferred or previously set
     if (document.documentElement.classList.contains("dark")) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
     }
   }, []);

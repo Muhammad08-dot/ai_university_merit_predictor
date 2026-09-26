@@ -73,7 +73,7 @@ export default function Footer() {
           <p className="text-green-200/80 text-sm max-w-2xl mx-auto">
             This is a 100% open-source project created to help Pakistani students. 
             Anyone is free to use, copy, modify, and improve this calculator. 
-            Let's build a better future together!
+            Let&apos;s build a better future together!
           </p>
         </div>
 

@@ -211,8 +211,13 @@ export default function CalculatorApp() {
   const [typeFilter, setTypeFilter] = useState("All");
   const [provinceFilter, setProvinceFilter] = useState("All");
 
-  const matricPct = matricTotal > 0 ? (matricObtained / matricTotal) * 100 : 0;
-  const interPct = interTotal > 0 ? (interObtained / interTotal) * 100 : 0;
+  const numMatricTotal = Number(matricTotal) || 0;
+  const numMatricObtained = Number(matricObtained) || 0;
+  const numInterTotal = Number(interTotal) || 0;
+  const numInterObtained = Number(interObtained) || 0;
+
+  const matricPct = numMatricTotal > 0 ? (numMatricObtained / numMatricTotal) * 100 : 0;
+  const interPct = numInterTotal > 0 ? (numInterObtained / numInterTotal) * 100 : 0;
 
   useEffect(() => {
     async function loadData() {
@@ -847,8 +852,8 @@ export default function CalculatorApp() {
                         <span className="text-sm text-green-600 ml-2 font-medium">— {uni.testName}</span>
                       </div>
                       <div className={`text-2xl font-black ${
-                        (testScores[uni.id] ?? 70) >= 80 ? "text-green-600" :
-                        (testScores[uni.id] ?? 70) >= 60 ? "text-emerald-600" : "text-amber-600"
+                        Number(testScores[uni.id] ?? 70) >= 80 ? "text-green-600" :
+                        Number(testScores[uni.id] ?? 70) >= 60 ? "text-emerald-600" : "text-amber-600"
                       }`}>
                         {testScores[uni.id] ?? 70}%
                       </div>
