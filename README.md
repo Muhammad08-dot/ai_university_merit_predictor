@@ -14,6 +14,12 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Drizzle 
 
 ---
 
+## 🎥 App Walkthrough
+Watch how easy it is to calculate your merit in just a few steps:
+![App Walkthrough Animation](./public/app_walkthrough.webp)
+
+---
+
 ## ✨ Key Features
 
 ### 🇵🇰 1. All-Pakistan Universities Dataset
