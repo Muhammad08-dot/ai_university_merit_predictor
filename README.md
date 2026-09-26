@@ -2,7 +2,19 @@
 
 > **A high-performance, AI-orchestrated web application that calculates university admission merit aggregates across all provinces of Pakistan, powered by Google Gemini API and a High-Level Multi-Agent Manager Architecture.**
 
-![AI University Merit Predictor Preview](./public/readme_hero_preview.png)
+## 📸 How it Works (Step-by-Step)
+
+### Step 1: Academic Profile
+![Step 1: Academic Profile](./public/step1.png)
+
+### Step 2: Select Programs
+![Step 2: Select Programs](./public/step2.png)
+
+### Step 3: Select Universities
+![Step 3: Select Universities](./public/step3.png)
+
+### Step 4: Predict Test Scores
+![Step 4: Predict Test Scores](./public/step4.png)
 
 ---
 
@@ -11,12 +23,6 @@
 The **AI University Merit Predictor** is designed to provide Pakistani high school and college students with a frictionless, highly accurate, and intelligent platform to calculate aggregate scores and assess admission likelihood across all major universities in Pakistan.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Drizzle ORM**, **Tailwind CSS v4**, and **Google Gemini 2.5 Flash**, the platform eliminates the need for user accounts/login barriers, offering instant merit calculations, province-specific location matching, Hafiz-e-Quran bonus additions, and a floating **Roman Urdu AI Web Guide**.
-
----
-
-## 🎥 App Walkthrough
-Watch how easy it is to calculate your merit in just a few steps:
-![App Walkthrough Animation](./public/app_walkthrough.webp)
 
 ---
 
